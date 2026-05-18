@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  currency  String?  @default("KES")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  budgets Budget[]
+}
+
+model Budget {
+  id         String   @id @default(cuid())
+  name       String
+  allocation Float
+  category   String
+  color      String   @default("#d79921")
+  archived   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  items BudgetItem[]
+}
+
+model BudgetItem {
+  id             String   @id @default(cuid())
+  label          String
+  amount         Float
+  tag            String?
+  isRecurring    Boolean  @default(false)
+  recurrenceType String?
+  date           DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  budgetId String
+  budget   Budget @relation(fields: [budgetId], references: [id], onDelete: Cascade)
+}

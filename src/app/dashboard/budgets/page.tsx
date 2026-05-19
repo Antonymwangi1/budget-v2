@@ -4,6 +4,7 @@ import UtilizationBadge, {
 } from "@/components/budgets/UtilizationBadge";
 import BudgetActions from "@/components/budgets/BudgetAction";
 import CreateBudgetButton from "@/components/budgets/CreateBudgetButton";
+import Link from "next/link";
 
 export default async function BudgetsPage() {
   const budgets = await getBudgets();
@@ -62,7 +63,10 @@ export default async function BudgetsPage() {
               className="flex flex-col md:grid md:grid-cols-[2fr_1fr_1.4fr_1fr_1fr_80px] px-4 py-3 border-b border-border/50 last:border-0 hover:bg-canvas/40 transition-colors gap-2 md:gap-0 md:items-center"
             >
               {/* Name */}
-              <div className="flex items-center gap-2.5">
+              <Link
+                href={`/dashboard/budgets/${budget.id}`}
+                className="flex items-center gap-2.5 hover:underline underline-offset-2"
+              >
                 <div
                   className="w-2 h-2 rounded-full flex-shrink-0"
                   style={{ background: budget.color }}
@@ -80,7 +84,7 @@ export default async function BudgetsPage() {
                     Archived
                   </span>
                 )}
-              </div>
+              </Link>
 
               {/* Allocation */}
               <div className="flex md:block items-center justify-between">

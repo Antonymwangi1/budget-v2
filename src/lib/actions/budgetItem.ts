@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getCurrencySymbol } from "../currencies";
 
 const ItemSchema = z.object({
   label: z.string().min(1, "Label is required"),

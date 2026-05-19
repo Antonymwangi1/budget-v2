@@ -1,3 +1,4 @@
+import { getCurrencySymbol } from '@/lib/currencies'
 import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
@@ -72,6 +73,6 @@ export async function getDashboardData() {
     categoryData,
     allocationSplit,
     trend,
-    currency: user.currency,
+    currency: getCurrencySymbol(user.currency || "KES"),
   };
 }

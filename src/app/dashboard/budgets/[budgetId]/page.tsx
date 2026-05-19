@@ -5,6 +5,7 @@ import ItemRow from "@/components/budget-detail/ItemRow";
 import AddItemButton from "@/components/budget-detail/AddItemButton";
 import Link from "next/link";
 import { IconArrowLeft } from "@tabler/icons-react";
+import BudgetSummaryCards from "@/components/budget-detail/BudgetSummaryCards";
 
 export default async function BudgetDetailPage({
   params,
@@ -12,7 +13,7 @@ export default async function BudgetDetailPage({
   params: { budgetId: string };
 }) {
   const budget = await getBudgetWithItems(params.budgetId);
-  const spent = budget.items.reduce((s, i) => s + i.amount, 0);
+  const spent = budget.items.reduce((s: number, i: any) => s + i.amount, 0);
   const remaining = budget.allocation - spent;
   const { pct, status } = getUtilization(spent, budget.allocation);
 
@@ -55,30 +56,11 @@ export default async function BudgetDetailPage({
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-3 gap-3">
-        {[
-          {
-            label: "Allocation",
-            value: budget.allocation,
-            color: "before:bg-accent",
-          },
-          { label: "Spent", value: spent, color: "before:bg-danger" },
-          { label: "Remaining", value: remaining, color: "before:bg-info" },
-        ].map(({ label, value, color }) => (
-          <div
-            key={label}
-            className={`relative bg-surface border border-border rounded-xl p-4 overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] ${color}`}
-          >
-            <p className="text-[11px] font-medium text-content-muted uppercase tracking-wider mb-2">
-              {label}
-            </p>
-            <p className="text-xl md:text-2xl font-medium text-content-text font-mono tracking-tight">
-              {value.toLocaleString()}
-            </p>
-            <p className="text-[11px] text-content-muted mt-1">KES</p>
-          </div>
-        ))}
-      </div>
+      <BudgetSummaryCards
+        spent={spent}
+        remaining={remaining}
+        allocation={budget.allocation}
+      />
 
       {/* Progress */}
       <div className="bg-surface border border-border rounded-xl p-4">

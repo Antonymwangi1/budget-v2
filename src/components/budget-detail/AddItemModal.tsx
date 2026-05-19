@@ -74,7 +74,7 @@ export default function AddItemModal({ budgetId, onClose }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-content-muted mb-1.5">
-                Amount (KES)
+                Amount
               </label>
               <input
                 type="number"

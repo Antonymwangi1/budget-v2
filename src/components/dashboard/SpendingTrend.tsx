@@ -19,7 +19,7 @@ export default function SpendingTrend({ data, currency }: Props) {
   return (
     <div className="bg-surface border border-border rounded-xl p-4 md:p-5">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-medium text-content-text">
+        <h2 className="text-md font-medium text-content-text">
           Spending trend
         </h2>
         <span className="text-[14px] font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full">

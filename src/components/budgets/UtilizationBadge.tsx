@@ -12,9 +12,9 @@ export function getUtilization(spent: number, allocation: number) {
 }
 
 const styles = {
-  healthy: "bg-success/15 text-[#545000]",
-  high: "bg-warning/15 text-[#7a3800]",
-  critical: "bg-danger/15 text-[#801800]",
+  healthy: "bg-success/15 text-[#b8bb26]",
+  high: "bg-warning/15 text-[#fe8019]",
+  critical: "bg-danger/15 text-[#fb4934]",
 };
 
 const labels = {

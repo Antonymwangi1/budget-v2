@@ -5,6 +5,7 @@ import UtilizationBadge, {
 import BudgetActions from "@/components/budgets/BudgetAction";
 import CreateBudgetButton from "@/components/budgets/CreateBudgetButton";
 import Link from "next/link";
+import BudgetAmountCell from "@/components/budgets/BudgetAmountCell";
 
 export default async function BudgetsPage() {
   const budgets = await getBudgets();
@@ -46,7 +47,7 @@ export default async function BudgetsPage() {
         )}
 
         {budgets.map((budget) => {
-          const spent = budget.items.reduce((s, i) => s + i.amount, 0);
+          const spent = budget.items.reduce((s: number, i: any) => s + i.amount, 0);
           const remaining = budget.allocation - spent;
           const { pct, status } = getUtilization(spent, budget.allocation);
 
@@ -92,12 +93,7 @@ export default async function BudgetsPage() {
                   Allocation
                 </span>
                 <div>
-                  <p className="text-sm text-content-text font-mono">
-                    {budget.allocation.toLocaleString()}
-                  </p>
-                  <p className="text-[11px] text-content-muted hidden md:block">
-                    KES
-                  </p>
+                  <BudgetAmountCell amount={budget.allocation} />
                 </div>
               </div>
 
@@ -107,7 +103,7 @@ export default async function BudgetsPage() {
                   Spent
                 </span>
                 <div>
-                  <p className="text-sm text-content-text font-mono">
+                  <p className="text-sm text-content-text">
                     {spent.toLocaleString()}
                   </p>
                   <div className="hidden md:block mt-1 h-1 w-full bg-border rounded-full overflow-hidden">
@@ -125,11 +121,11 @@ export default async function BudgetsPage() {
                   Remaining
                 </span>
                 <p
-                  className={`text-sm font-mono ${
+                  className={`text-sm ${
                     remaining < 0 ? "text-danger" : "text-content-text"
                   }`}
                 >
-                  {remaining.toLocaleString()}
+                  <BudgetAmountCell amount={remaining} />
                 </p>
               </div>
 

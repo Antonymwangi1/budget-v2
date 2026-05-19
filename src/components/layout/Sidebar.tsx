@@ -14,6 +14,7 @@ import {
   IconChartBar,
   IconX,
 } from "@tabler/icons-react";
+import SidebarCurrencyBadge from "./SidebarCurrencyBadge";
 
 const navItems = [
   {
@@ -38,7 +39,11 @@ const navItems = [
   },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  currencyBadge?: React.ReactNode
+}
+
+export default function Sidebar({ currencyBadge }: SidebarProps) {
   const pathname = usePathname();
   const { user } = useClerk();
   const { isSidebarOpen, closeSidebar } = useUIStore();
@@ -63,9 +68,7 @@ export default function Sidebar() {
         <span className="text-sidebar-text text-base font-medium tracking-tight">
           Budget V2
         </span>
-        <span className="ml-auto text-[10px] font-medium text-accent bg-accent/10 px-1.5 py-0.5 rounded-sm tracking-wide">
-          KES
-        </span>
+        {currencyBadge}
         {/* Close button — mobile only */}
         <button
           onClick={closeSidebar}
@@ -90,10 +93,10 @@ export default function Sidebar() {
                   href={link.href}
                   onClick={closeSidebar}
                   className={`
-                    relative flex items-center gap-2.5 px-5 py-2.5 text-md transition-colors duration-100
+                    relative flex items-center gap-2.5 px-5 py-2.5 text-sm transition-colors duration-100
                     ${
                       active
-                        ? "text-accent-light bg-accent/10 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[2.5px] before:h-5 before:bg-accent before:rounded-r-sm"
+                        ? "text-accent-light bg-accent/10 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[2.5px] before:h-5 before:bg-accent before:rounded-r-sm font-bold"
                         : "text-sidebar-muted hover:text-sidebar-text hover:bg-white/5"
                     }
                   `}

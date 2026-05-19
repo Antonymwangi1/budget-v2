@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { IconX } from "@tabler/icons-react";
 import { createBudget, updateBudget } from "@/lib/actions/budget";
+import { getCurrencySymbol } from "../settings/CurrencySelector";
 
 const COLORS = [
   "#d79921",
@@ -33,6 +34,7 @@ interface Props {
     id: string;
     name: string;
     allocation: number;
+    currency: string;
     category: string;
     color: string;
   };
@@ -51,7 +53,7 @@ export default function BudgetModal({ onClose, existing }: Props) {
 
   const isCustom = category === "Custom";
   const finalCategory = isCustom ? customCategory : category;
-
+    
   const handleSubmit = () => {
     setError("");
     startTransition(async () => {
@@ -103,7 +105,7 @@ export default function BudgetModal({ onClose, existing }: Props) {
           {/* Allocation */}
           <div>
             <label className="block text-xs font-medium text-content-muted mb-1.5">
-              Allocation (KES)
+              Allocation
             </label>
             <input
               type="number"
@@ -188,7 +190,7 @@ export default function BudgetModal({ onClose, existing }: Props) {
               {finalCategory || "Category"}
             </span>
             <span className="ml-auto text-sm font-medium text-content-text flex-shrink-0">
-              KES {Number(allocation || 0).toLocaleString()}
+               {Number(allocation || 0).toLocaleString()}
             </span>
           </div>
 

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getCurrencySymbol } from "../currencies";
 
 const BudgetSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -78,7 +79,7 @@ export async function getBudgets() {
 
   return prisma.budget.findMany({
     where: { userId: user.id },
-    include: { items: true },
+    include: { items: true, },
     orderBy: { createdAt: "desc" },
   });
 }

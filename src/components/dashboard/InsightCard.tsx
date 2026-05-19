@@ -34,7 +34,7 @@ export default function InsightCard({
         {icon}
         {label}
       </div>
-      <div className="text-2xl md:text-3xl font-medium text-content-text tracking-tight leading-none mb-1.5">
+      <div className="text-2xl md:text-xl font-medium text-content-text tracking-tight leading-none mb-1.5">
         {value}
       </div>
       <div className="text-xs text-content-muted">{sub}</div>

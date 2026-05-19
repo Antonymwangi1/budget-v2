@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 import { IconTrash, IconRepeat } from "@tabler/icons-react";
 import { deleteBudgetItem } from "@/lib/actions/budgetItem";
+import { useCurrency } from "../providers/CurrencyProfider";
 
 interface Props {
   item: {
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export default function ItemRow({ item, budgetId, color }: Props) {
+  const currency = useCurrency();
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
@@ -30,7 +32,6 @@ export default function ItemRow({ item, budgetId, color }: Props) {
 
   return (
     <div className="flex items-center gap-3 px-4 py-3 border-b border-border/50 last:border-0 hover:bg-canvas/40 transition-colors">
-      {/* Icon */}
       <div
         className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-medium"
         style={{ background: `${color}18`, color }}
@@ -38,7 +39,6 @@ export default function ItemRow({ item, budgetId, color }: Props) {
         {item.label[0].toUpperCase()}
       </div>
 
-      {/* Label + meta */}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-content-text truncate">
           {item.label}
@@ -59,7 +59,6 @@ export default function ItemRow({ item, budgetId, color }: Props) {
         </div>
       </div>
 
-      {/* Tag */}
       {item.tag && (
         <span
           className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full font-medium flex-shrink-0"
@@ -69,12 +68,10 @@ export default function ItemRow({ item, budgetId, color }: Props) {
         </span>
       )}
 
-      {/* Amount */}
-      <p className="text-sm font-medium font-mono text-content-text flex-shrink-0">
-        KES {item.amount.toLocaleString()}
+      <p className="text-sm font-medium text-content-text flex-shrink-0">
+        {currency} {item.amount.toLocaleString()}
       </p>
 
-      {/* Delete */}
       <button
         onClick={handleDelete}
         disabled={isPending}

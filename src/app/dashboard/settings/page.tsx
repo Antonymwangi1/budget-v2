@@ -2,6 +2,7 @@ import { getSettings } from "@/lib/actions/settings";
 import CurrencySelector from "@/components/settings/CurrencySelector";
 import { IconCoin, IconUser, IconPalette } from "@tabler/icons-react";
 import { currentUser } from "@clerk/nextjs/server";
+import ManageAccountButton from "@/components/settings/ManageAccountButton";
 
 export default async function SettingsPage() {
   const [settings, clerkUser] = await Promise.all([
@@ -39,14 +40,7 @@ export default async function SettingsPage() {
             </p>
           </div>
 
-          <a
-            href="https://accounts.clerk.dev/user"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3 py-1.5 text-xs border border-border rounded-lg text-content-muted hover:bg-canvas transition-colors flex-shrink-0"
-          >
-            Manage
-          </a>
+          <ManageAccountButton />
         </div>
       </div>
 

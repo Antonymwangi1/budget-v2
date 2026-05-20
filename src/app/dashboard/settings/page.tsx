@@ -3,6 +3,8 @@ import CurrencySelector from "@/components/settings/CurrencySelector";
 import { IconCoin, IconUser, IconPalette } from "@tabler/icons-react";
 import { currentUser } from "@clerk/nextjs/server";
 import ManageAccountButton from "@/components/settings/ManageAccountButton";
+import ThemeToggle from "@/components/layout/ThemeToggle";
+import DeleteAllButton from "@/components/settings/DeleteAllButton";
 
 export default async function SettingsPage() {
   const [settings, clerkUser] = await Promise.all([
@@ -79,14 +81,7 @@ export default async function SettingsPage() {
               <p className="text-xs text-content-muted">Light or dark mode</p>
             </div>
           </div>
-          <div className="flex items-center bg-border rounded-full p-0.5 gap-0.5 w-fit">
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface text-content-text cursor-pointer">
-              Light
-            </span>
-            <span className="px-3 py-1 rounded-full text-xs text-content-muted cursor-pointer">
-              Dark
-            </span>
-          </div>
+          <ThemeToggle />
         </div>
       </div>
 
@@ -106,9 +101,7 @@ export default async function SettingsPage() {
               Permanently delete all budgets and items
             </p>
           </div>
-          <button className="px-4 py-2 text-xs font-medium text-danger border border-danger/30 rounded-lg hover:bg-danger/5 transition-colors flex-shrink-0">
-            Delete all
-          </button>
+         <DeleteAllButton />
         </div>
       </div>
     </div>

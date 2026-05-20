@@ -4,14 +4,11 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { CURRENCIES } from '@/lib/currencies'
+import { CURRENCIES } from "@/lib/currencies";
 
 const SettingsSchema = z.object({
-  currency: z.enum(
-    CURRENCIES.map((c) => c.code) as [string, ...string[]]
-  ),
-})
-
+  currency: z.enum(CURRENCIES.map((c) => c.code) as [string, ...string[]]),
+});
 
 async function getUser() {
   const { userId: clerkId } = await auth();
@@ -37,5 +34,18 @@ export async function updateCurrency(formData: unknown) {
 
   revalidatePath("/dashboard/settings");
   revalidatePath("/dashboard");
+  return { success: true };
+}
+
+export async function deleteAllData() {
+  const user = await getUser();
+
+  await prisma.budget.deleteMany({
+    where: { userId: user.id },
+  });
+
+  revalidatePath("/dashboard");
+  revalidatePath("/dashboard/budgets");
+  revalidatePath("/dashboard/recurring");
   return { success: true };
 }

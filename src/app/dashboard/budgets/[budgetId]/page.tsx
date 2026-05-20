@@ -12,7 +12,8 @@ export default async function BudgetDetailPage({
 }: {
   params: { budgetId: string };
 }) {
-  const budget = await getBudgetWithItems(params.budgetId);
+  const { budgetId } = await params;
+  const budget = await getBudgetWithItems(budgetId);
   const spent = budget.items.reduce((s: number, i: any) => s + i.amount, 0);
   const remaining = budget.allocation - spent;
   const { pct, status } = getUtilization(spent, budget.allocation);

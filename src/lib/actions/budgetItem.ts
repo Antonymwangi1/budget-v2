@@ -35,6 +35,35 @@ export async function getBudgetWithItems(budgetId: string) {
   return budget;
 }
 
+export async function updateBudgetItem(budgetId: string, itemId: string, formData: unknown) {
+  const user = await getUser();
+
+  const item = await prisma.budgetItem.findFirst({
+    where: { id: itemId, budget: { userId: user.id } },
+  });
+  if (!item) return { error: "Item not found" };
+
+  const parsed = ItemSchema.safeParse(formData);
+  if (!parsed.success) return { error: parsed.error.issues[0].message };
+
+  const { isRecurring, recurrenceType, date, ...rest } = parsed.data;
+
+  await prisma.budgetItem.update({
+    where: { id: itemId },
+    data: {
+      ...rest,
+      isRecurring,
+      recurrenceType: isRecurring ? recurrenceType : null,
+      date: date ? new Date(date) : new Date(),
+    },
+  });
+
+  revalidatePath(`/dashboard/budgets/${budgetId}`);
+  revalidatePath("/dashboard");
+  revalidatePath("/dashboard/recurring");
+  return { success: true };
+}
+
 export async function createBudgetItem(budgetId: string, formData: unknown) {
   const user = await getUser();
 

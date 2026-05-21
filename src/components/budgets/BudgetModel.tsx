@@ -34,7 +34,6 @@ interface Props {
     id: string;
     name: string;
     allocation: number;
-    currency: string;
     category: string;
     color: string;
   };

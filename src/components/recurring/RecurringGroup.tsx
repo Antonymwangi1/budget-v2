@@ -52,7 +52,7 @@ export default function RecurringGroup({ title, items, monthlyNote }: Props) {
       {items.map((item) => (
         <div
           key={item.id}
-          className="flex items-center gap-3 px-4 py-3 border-b border-border/50 last:border-0 hover:bg-canvas/40 transition-colors"
+          className="flex items-center gap-3 px-4 py-3 border-b border-border last:border-0 hover:bg-canvas/40 transition-colors"
         >
           {/* Color dot + icon */}
           <div

@@ -62,6 +62,18 @@ export async function archiveBudget(id: string) {
   return { success: true };
 }
 
+export async function unarchiveBudget(id: string) {
+  const user = await getUser();
+
+  await prisma.budget.updateMany({
+    where: { id, userId: user.id },
+    data: { archived: false },
+  });
+
+  revalidatePath("/dashboard/budgets");
+  return { success: true };
+}
+
 export async function deleteBudget(id: string) {
   const user = await getUser();
 

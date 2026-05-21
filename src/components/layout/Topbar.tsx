@@ -2,8 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import { useUIStore } from "@/lib/store";
-import { IconBell, IconMenu2 } from "@tabler/icons-react";
+import { IconMenu2 } from "@tabler/icons-react";
 import ThemeToggle from "./ThemeToggle";
+import NotificationBell from "./NotificationBell";
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/dashboard": {
@@ -52,10 +53,7 @@ export default function Topbar() {
         <ThemeToggle />
 
         {/* Notification bell */}
-        <button className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-content-muted hover:bg-border transition-colors relative">
-          <IconBell size={16} />
-          <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-danger rounded-full" />
-        </button>
+        <NotificationBell />
       </div>
     </header>
   );

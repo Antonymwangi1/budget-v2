@@ -2,29 +2,42 @@
 
 import { useState, useTransition } from "react";
 import { IconX } from "@tabler/icons-react";
-import { createBudgetItem } from "@/lib/actions/budgetItem";
+import { updateBudgetItem } from "@/lib/actions/budgetItem";
 
 const RECURRENCE_TYPES = ["Daily", "Weekly", "Monthly", "Yearly"];
 
 interface Props {
   budgetId: string;
+  item: {
+    id: string;
+    label: string;
+    amount: number;
+    tag: string | null;
+    isRecurring: boolean;
+    recurrenceType: string | null;
+    date: Date;
+  };
   onClose: () => void;
 }
 
-export default function AddItemModal({ budgetId, onClose }: Props) {
-  const [label, setLabel] = useState("");
-  const [amount, setAmount] = useState("");
-  const [tag, setTag] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [isRecurring, setIsRecurring] = useState(false);
-  const [recurrenceType, setRecurrenceType] = useState("Monthly");
+export default function EditItemModal({ budgetId, item, onClose }: Props) {
+  const [label, setLabel] = useState(item.label);
+  const [amount, setAmount] = useState(String(item.amount));
+  const [tag, setTag] = useState(item.tag ?? "");
+  const [date, setDate] = useState(
+    new Date(item.date).toISOString().split("T")[0],
+  );
+  const [isRecurring, setIsRecurring] = useState(item.isRecurring);
+  const [recurrenceType, setRecurrenceType] = useState(
+    item.recurrenceType ?? "Monthly",
+  );
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = () => {
     setError("");
     startTransition(async () => {
-      const result = await createBudgetItem(budgetId, {
+      const result = await updateBudgetItem(item.id, budgetId, {
         label,
         amount,
         tag,
@@ -45,7 +58,7 @@ export default function AddItemModal({ budgetId, onClose }: Props) {
       <div className="bg-surface border border-border rounded-xl w-full max-w-md">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-          <h2 className="text-base font-medium text-content-text">Add item</h2>
+          <h2 className="text-base font-medium text-content-text">Edit item</h2>
           <button
             onClick={onClose}
             className="text-content-muted hover:text-content-text transition-colors"
@@ -65,7 +78,6 @@ export default function AddItemModal({ budgetId, onClose }: Props) {
               type="text"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
-              placeholder="e.g. AMD Ryzen 9 7950X"
               className="w-full px-3 py-2 text-sm bg-canvas border border-border rounded-lg text-content-text placeholder:text-content-muted focus:outline-none focus:border-accent transition-colors"
             />
           </div>
@@ -74,13 +86,12 @@ export default function AddItemModal({ budgetId, onClose }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-content-muted mb-1.5">
-                Amount
+                Amount (KES)
               </label>
               <input
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="e.g. 22000"
                 className="w-full px-3 py-2 text-sm bg-canvas border border-border rounded-lg text-content-text placeholder:text-content-muted focus:outline-none focus:border-accent transition-colors"
               />
             </div>
@@ -107,7 +118,7 @@ export default function AddItemModal({ budgetId, onClose }: Props) {
               type="text"
               value={tag}
               onChange={(e) => setTag(e.target.value)}
-              placeholder="e.g. Component, Peripheral, Essential"
+              placeholder="e.g. Component, Essential"
               className="w-full px-3 py-2 text-sm bg-canvas border border-border rounded-lg text-content-text placeholder:text-content-muted focus:outline-none focus:border-accent transition-colors"
             />
           </div>
@@ -177,7 +188,7 @@ export default function AddItemModal({ budgetId, onClose }: Props) {
             disabled={isPending}
             className="px-4 py-2 text-sm font-medium bg-accent text-sidebar rounded-lg hover:bg-accent-light transition-colors disabled:opacity-50"
           >
-            {isPending ? "Adding..." : "Add item"}
+            {isPending ? "Saving..." : "Save changes"}
           </button>
         </div>
       </div>

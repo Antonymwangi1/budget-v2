@@ -61,7 +61,7 @@ export default async function BudgetsPage() {
           return (
             <div
               key={budget.id}
-              className="flex flex-col md:grid md:grid-cols-[2fr_1fr_1.4fr_1fr_1fr_80px] px-4 py-3 border-b border-border/50 last:border-0 hover:bg-canvas/40 transition-colors gap-2 md:gap-0 md:items-center"
+              className="flex flex-col md:grid md:grid-cols-[2fr_1fr_1.4fr_1fr_1fr_80px] px-4 py-3 border-b border-border last:border-0 hover:bg-canvas/40 transition-colors gap-2 md:gap-0 md:items-center"
             >
               {/* Name */}
               <Link

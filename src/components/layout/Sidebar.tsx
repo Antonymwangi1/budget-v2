@@ -33,7 +33,6 @@ const navItems = [
     section: "Manage",
     links: [
       { href: "/dashboard/recurring", label: "Recurring", icon: IconRepeat },
-      { href: "/dashboard/reports", label: "Reports", icon: IconChartPie },
       { href: "/dashboard/settings", label: "Settings", icon: IconSettings },
     ],
   },

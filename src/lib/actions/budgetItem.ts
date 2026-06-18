@@ -35,7 +35,15 @@ export async function getBudgetWithItems(budgetId: string) {
   return budget;
 }
 
-export async function updateBudgetItem(budgetId: string, itemId: string, formData: unknown) {
+export async function updateBudgetItem({
+  budgetId,
+  itemId,
+  formData,
+}: {
+  budgetId: string;
+  itemId: string;
+  formData: unknown;
+}) {
   const user = await getUser();
 
   const item = await prisma.budgetItem.findFirst({

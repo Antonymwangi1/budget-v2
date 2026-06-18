@@ -37,13 +37,17 @@ export default function EditItemModal({ budgetId, item, onClose }: Props) {
   const handleSubmit = () => {
     setError("");
     startTransition(async () => {
-      const result = await updateBudgetItem(item.id, budgetId, {
-        label,
-        amount,
-        tag,
-        date,
-        isRecurring,
-        recurrenceType,
+      const result = await updateBudgetItem({
+        itemId: item.id,
+        budgetId,
+        formData: {
+          label,
+          amount,
+          tag,
+          date,
+          isRecurring,
+          recurrenceType,
+        },
       });
       if (result.error) {
         setError(result.error);

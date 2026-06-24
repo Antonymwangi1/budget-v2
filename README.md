@@ -191,7 +191,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Author
 
-**Antony Mwangi** — Full-stack developer based in Nairobi, Kenya
+**Antony Mwangi** - Full stack developer based in Nairobi, Kenya
 
 - GitHub: [@Antonymwangi1](https://github.com/Antonymwangi1)
 - LinkedIn: [linkedin.com/in/antony-mwangi](https://linkedin.com/in/antony-mwangi)

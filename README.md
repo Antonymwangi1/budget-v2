@@ -8,16 +8,16 @@ A modern, production quality personal finance web app built with Next.js 16, Pri
 
 ## Features
 
-- **Budget tracking** — Create budgets for any category. Custom categories supported. Name it anything from "Housing" to "Custom PC Build"
-- **Budget items** — Log expenses against each budget with tags, dates, and recurring support
-- **Recurring expenses** — Mark items as recurring (daily, weekly, monthly, yearly) and see your total monthly commitment at a glance
-- **Smart notifications** — Bell alerts when any budget hits 90% (High) or 100% (Critical) utilization
-- **Dashboard analytics** — Spending by category bar chart, allocation donut chart, and 6-month area trend line all powered by Recharts with real database data
-- **Utilization badges** — Healthy / High / Critical badges with color-coded progress bars on every budget
-- **Multi-currency** — KES, USD, EUR, GBP, NGN, UGX, TZS and more switch any time in settings
-- **Light and dark mode** — Gruvbox-inspired design system with `data-theme` toggle, persisted in localStorage
-- **Fully responsive** — Mobile first layout with hamburger drawer sidebar on small screens
-- **Auth** — Managed authentication via Clerk with styled sign in and sign up forms
+- **Budget tracking** - Create budgets for any category. Custom categories supported. Name it anything from "Housing" to "Custom PC Build"
+- **Budget items** - Log expenses against each budget with tags, dates, and recurring support
+- **Recurring expenses** - Mark items as recurring (daily, weekly, monthly, yearly) and see your total monthly commitment at a glance
+- **Smart notifications** - Bell alerts when any budget hits 90% (High) or 100% (Critical) utilization
+- **Dashboard analytics** - Spending by category bar chart, allocation donut chart, and 6-month area trend line all powered by Recharts with real database data
+- **Utilization badges** - Healthy / High / Critical badges with color-coded progress bars on every budget
+- **Multi-currency** - KES, USD, EUR, GBP, NGN, UGX, TZS and more switch any time in settings
+- **Light and dark mode** - Gruvbox-inspired design system with `data-theme` toggle, persisted in localStorage
+- **Fully responsive** - Mobile first layout with hamburger drawer sidebar on small screens
+- **Auth** - Managed authentication via Clerk with styled sign in and sign up forms
 
 ---
 
@@ -28,7 +28,7 @@ A modern, production quality personal finance web app built with Next.js 16, Pri
 | Framework | Next.js 16 (App Router, TypeScript, Turbopack) |
 | Styling | Tailwind CSS v3 + Gruvbox CSS variable design system |
 | Auth | Clerk (managed auth, webhooks) |
-| Database | PostgreSQL — local dev, Supabase production |
+| Database | PostgreSQL - local dev, Supabase production |
 | ORM | Prisma 6 with `@prisma/adapter-pg` driver adapter |
 | Charts | Recharts |
 | Client state | Zustand |
@@ -41,15 +41,15 @@ A modern, production quality personal finance web app built with Next.js 16, Pri
 
 ## Architecture decisions
 
-**App Router + Server Components** — Data fetching happens on the server by default. Pages like the dashboard and budgets list are Server Components that query the database directly no API routes, no `useEffect`, no loading spinners for initial renders. Client Components handle only interactivity (modals, charts, toggles).
+**App Router + Server Components** - Data fetching happens on the server by default. Pages like the dashboard and budgets list are Server Components that query the database directly no API routes, no `useEffect`, no loading spinners for initial renders. Client Components handle only interactivity (modals, charts, toggles).
 
-**Server Actions for mutations** — Create, update, archive, and delete operations use Next.js Server Actions instead of REST API routes. This eliminates boilerplate, keeps mutations type safe end to end, and allows `revalidatePath()` to refresh server data automatically after every change.
+**Server Actions for mutations** - Create, update, archive, and delete operations use Next.js Server Actions instead of REST API routes. This eliminates boilerplate, keeps mutations type safe end to end, and allows `revalidatePath()` to refresh server data automatically after every change.
 
-**Prisma 6 driver adapter pattern** — Uses `@prisma/adapter-pg` with a `pg` Pool instead of the old singleton pattern. This gives explicit control over connection pooling, works correctly in serverless environments, and is the Prisma 6 recommended approach.
+**Prisma 6 driver adapter pattern** - Uses `@prisma/adapter-pg` with a `pg` Pool instead of the old singleton pattern. This gives explicit control over connection pooling, works correctly in serverless environments, and is the Prisma 6 recommended approach.
 
-**CurrencyProvider context** — Currency is fetched once at the dashboard layout level and distributed via React context. No component below the layout needs to hit the database for currency zero redundant queries.
+**CurrencyProvider context** - Currency is fetched once at the dashboard layout level and distributed via React context. No component below the layout needs to hit the database for currency zero redundant queries.
 
-**Ownership validation on all mutations** — Every Server Action that modifies data includes `userId` in the Prisma `where` clause alongside the record `id`. This prevents any authenticated user from modifying another user's data even if they know the record ID.
+**Ownership validation on all mutations** - Every Server Action that modifies data includes `userId` in the Prisma `where` clause alongside the record `id`. This prevents any authenticated user from modifying another user's data even if they know the record ID.
 
 ---
 
@@ -191,7 +191,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Author
 
-**Antony Mwangi** — Full-stack developer based in Nairobi, Kenya
+**Antony Mwangi** - Full stack developer based in Nairobi, Kenya
 
 - GitHub: [@Antonymwangi1](https://github.com/Antonymwangi1)
 - LinkedIn: [linkedin.com/in/antony-mwangi](https://linkedin.com/in/antony-mwangi)

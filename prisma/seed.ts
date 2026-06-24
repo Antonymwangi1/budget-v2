@@ -10,8 +10,8 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const clerkId = "user_3Dtf1cFaLz561shz0J9JcE7l0MR";
-  const email = "mwangiantony247@gmail.com";
+  const clerkId = "xxxx-xxxx-xxxx-xxxx"; // Replace with a valid Clerk ID
+  const email = "x@example.com"; // Replace with a valid email
 
   const user = await prisma.user.upsert({
     where: { clerkId },

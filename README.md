@@ -176,16 +176,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
----
-
-## Roadmap
-
-- [ ] Clerk production mode + webhook for automatic user creation
-- [ ] Reports page with monthly breakdown and CSV export
-- [ ] Budget search and filter on the budgets page
-- [ ] PWA manifest for mobile install
-- [ ] M-Pesa Daraja API integration for automatic transaction import
-- [ ] Notification history and read/unread state
 
 ---
 
